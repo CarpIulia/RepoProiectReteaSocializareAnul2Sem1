@@ -1,0 +1,14 @@
+.root {
+    -fx-background-image: url(../images/authImage.jpg);
+    -fx-image-source: url(../images/authImage.jpg) ;
+}
+#authLabel {
+    -fx-font-size: 18px;
+    -fx-font-family: Script MT Bold;
+    -fx-font-weight: bold;
+    -fx-text-fill: #b30086;
+    -fx-effect: dropshadow( gaussian , #9966ff, 0,0,0,2 );
+}
+.button {
+    -fx-background-color: linear-gradient(#bb99ff, #9966ff);
+}

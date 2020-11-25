@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="274.0" prefWidth="371.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="socialnetwork.controller.FriendshipRequestMessageController">
+   <children>
+      <TextArea fx:id="messageTextArea" layoutX="39.0" layoutY="56.0" prefHeight="181.0" prefWidth="236.0" />
+      <Button fx:id="skipButton" layoutX="285.0" layoutY="134.0" mnemonicParsing="false" onAction="#skipHandle" prefHeight="25.0" prefWidth="52.0" text="Skip" />
+      <Button fx:id="sendButton" layoutX="285.0" layoutY="95.0" mnemonicParsing="false" onAction="#sendHandle" prefHeight="25.0" prefWidth="52.0" text="Send" />
+      <Label layoutX="101.0" layoutY="29.0" text="Your message">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="-7.0" layoutY="14.0" prefHeight="5.0" prefWidth="382.0" />
+      <Separator layoutX="-3.0" layoutY="258.0" prefHeight="5.0" prefWidth="382.0" />
+      <Button fx:id="cancelButton" layoutX="285.0" layoutY="173.0" mnemonicParsing="false" onAction="#cancelHandle" text="Cancel" />
+   </children>
+</AnchorPane>
