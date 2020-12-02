@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="401.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="socialnetwork.controller.ComposeMessageController">
+    <children>
+    <TextField fx:id="currentUser" editable="false" layoutX="14.0" layoutY="14.0">
+        <font>
+            <Font size="18.0" />
+        </font></TextField>
+        <MenuBar layoutX="238.0" layoutY="21.0" prefHeight="25.0" prefWidth="217.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Home">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Home Page" onAction="#backToHomePage"/>
+                        <MenuItem mnemonicParsing="false" text="Friendship requests" onAction="#handleYourRequests"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Messages">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Inbox" onAction="#handleInbox"/>
+                        <MenuItem disable="true" mnemonicParsing="false" text="Compose" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Account">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Settings" />
+                        <MenuItem mnemonicParsing="false" text="Log out" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Separator layoutX="455.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="406.0" prefWidth="1.0" />
+      <TextArea fx:id="textAreaMessage" layoutX="16.0" layoutY="105.0" prefHeight="247.0" prefWidth="423.0" />
+      <Button layoutX="16.0" layoutY="362.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Send" onAction="#sendMessage"/>
+      <Button layoutX="81.0" layoutY="362.0" mnemonicParsing="false" text="Delete" onAction="#clearMessageFields"/>
+      <TableView fx:id="tableViewPrieteniTo" layoutX="471.0" layoutY="75.0" prefHeight="277.0" prefWidth="175.0">
+        <columns>
+          <TableColumn fx:id="tableColumnLastName" prefWidth="86.5" text="Last Name" />
+          <TableColumn fx:id="tableColumnFirstName" prefWidth="86.5" text="First Name" />
+        </columns>
+      </TableView>
+      <Button layoutX="533.0" layoutY="362.0" mnemonicParsing="false" onAction="#createToList" prefHeight="25.0" prefWidth="51.0" text="Add" />
+      <TextField fx:id="textFieldTo" layoutX="40.0" layoutY="75.0" prefHeight="25.0" prefWidth="399.0" />
+      <Label layoutX="16.0" layoutY="78.0" text="TO">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="401.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="socialnetwork.controller.InboxController">
+    <children>
+        <TextField fx:id="currentUser" editable="false" layoutX="14.0" layoutY="14.0">
+            <font>
+                <Font size="18.0" />
+            </font></TextField>
+        <MenuBar layoutX="238.0" layoutY="21.0" prefHeight="25.0" prefWidth="217.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Home">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#backToHomePage" text="Home Page" />
+                        <MenuItem mnemonicParsing="false" text="Friendship requests" onAction="#handleYourRequests"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Messages">
+                    <items>
+                        <MenuItem disable="true" mnemonicParsing="false" text="Inbox" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleComposeMessage" text="Compose" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Account">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Settings" />
+                        <MenuItem mnemonicParsing="false" text="Log out" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Separator layoutX="455.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="406.0" prefWidth="1.0" />
+      <TableView fx:id="tableViewMessages" layoutX="14.0" layoutY="67.0" onMouseClicked="#showMessagesHandle" prefHeight="321.0" prefWidth="427.0">
+        <columns>
+          <TableColumn fx:id="tableColumnFrom" prefWidth="75.0" text="From">
+              <columns>
+                  <TableColumn fx:id="tableColumnLastName" prefWidth="80.0" text="Last Name" />
+                  <TableColumn fx:id="tableColumnFirstName" prefWidth="80.0" text="First Name" />
+              </columns>
+          </TableColumn>
+          <TableColumn fx:id="tableColumnMessage" prefWidth="150.0" text="Message" />
+            <TableColumn fx:id="tableColumnDate" prefWidth="122.0" text="Date" />
+        </columns>
+      </TableView>
+      <TextArea fx:id="replyMessageTextArea" layoutX="464.0" layoutY="286.0" prefHeight="60.0" prefWidth="182.0" />
+      <Button layoutX="529.0" layoutY="355.0" mnemonicParsing="false" text="Reply" onAction="#replyToMessage"/>
+      <ListView fx:id="conversationListView" layoutX="464.0" layoutY="67.0" prefHeight="200.0" prefWidth="182.0" />
+    </children>
+</AnchorPane>

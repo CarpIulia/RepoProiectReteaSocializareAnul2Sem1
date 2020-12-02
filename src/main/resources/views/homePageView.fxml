@@ -32,10 +32,16 @@
       <TextField fx:id="textFieldStatus" layoutX="286.0" layoutY="330.0" prefHeight="25.0" prefWidth="160.0" />
       <MenuBar layoutX="238.0" layoutY="21.0" prefHeight="25.0" prefWidth="217.0">
         <menus>
+            <Menu mnemonicParsing="true" text="Home">
+                <items>
+                    <MenuItem disable="true" mnemonicParsing="false" text="Home page"/>
+                    <MenuItem mnemonicParsing="false" text="Friendship requests" onAction="#handleYourRequests"/>
+                </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Messages">
             <items>
-              <MenuItem mnemonicParsing="false" text="Inbox" />
-                <MenuItem mnemonicParsing="false" text="Compose" />
+              <MenuItem mnemonicParsing="false" text="Inbox" onAction="#handleInbox"/>
+                <MenuItem fx:id="composeMessage" mnemonicParsing="false" text="Compose" onAction="#handleComposeMessage"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Account">

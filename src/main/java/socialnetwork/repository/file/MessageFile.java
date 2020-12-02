@@ -29,13 +29,13 @@ public class MessageFile extends AbstractFileRepository<Long, Message> {
         List<Utilizator> to = new ArrayList<>();
         Utilizator utilizatorTo = null;
         while(nrTo>0) {
-            Long id = Long.valueOf(k++);
+            Long id = Long.valueOf(attributes.get(k++));
             utilizatorTo = new Utilizator(attributes.get(k++), attributes.get(k++));
-            utilizator.setId(id);
+            utilizatorTo.setId(id);
             to.add(utilizatorTo);
             nrTo--;
         }
-        Message message = new Message(utilizator, to, attributes.get(k++), LocalDateTime.parse(attributes.get(k)));
+        Message message = new Message(utilizator, to, attributes.get(k++), LocalDateTime.parse(attributes.get(k++)), Long.parseLong(attributes.get(k)));
         message.setId(Long.parseLong(attributes.get((0))));
         return message;
     }

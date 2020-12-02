@@ -41,8 +41,9 @@ public class CererePrietenieService implements Observable<EntityChangeEvent> {
      *         otherwise returns null (the request doesn't exist)
      */
     public CererePrietenie removeCerere(long id) {
-        notifyObservers(new EntityChangeEvent(ChangeEventType.UPDATE, findOne(id)));
-        return repo.delete(id);
+        CererePrietenie cererePrietenie = repo.delete(id);
+        notifyObservers(new EntityChangeEvent(ChangeEventType.DELETE, findOne(id)));
+        return cererePrietenie;
     }
 
     /**

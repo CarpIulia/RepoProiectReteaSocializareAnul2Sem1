@@ -8,14 +8,14 @@ public class Message extends Entity<Long>{
     private List<Utilizator> to;
     private String message;
     private LocalDateTime date;
-    private Message reply;
+    private Long reply;
 
-    public Message(Utilizator from, List<Utilizator> to, String message, LocalDateTime date) {
+    public Message(Utilizator from, List<Utilizator> to, String message, LocalDateTime date, long reply) {
         this.from = from;
         this.to = to;
         this.message = message;
         this.date = date;
-        this.reply = null;
+        this.reply = reply;
     }
 
     public Utilizator getFrom() {
@@ -34,11 +34,11 @@ public class Message extends Entity<Long>{
         return date;
     }
 
-    public Message getReply() {
+    public Long getReply() {
         return reply;
     }
 
-    public void setReply(Message reply) {
+    public void setReply(Long reply) {
         this.reply = reply;
     }
 }

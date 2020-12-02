@@ -4,11 +4,16 @@ import socialnetwork.domain.Message;
 import socialnetwork.domain.Utilizator;
 import socialnetwork.repository.Repository;
 import socialnetwork.utils.GenerateId;
+import socialnetwork.utils.events.ChangeEventType;
+import socialnetwork.utils.events.EntityChangeEvent;
+import socialnetwork.utils.observer.Observable;
+import socialnetwork.utils.observer.Observer;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MessageService {
+public class MessageService implements Observable<EntityChangeEvent> {
     private Repository<Long, Message> repo;
 
     public MessageService(Repository<Long, Message> repo) { this.repo = repo; }
@@ -23,7 +28,7 @@ public class MessageService {
      *         otherwise returns the entity (a message with the same id already exists)
      */
     public Message addMessage(Utilizator from, List<Utilizator> to, String messageText, LocalDateTime date) {
-        Message message = new Message(from, to, messageText, date);
+        Message message = new Message(from, to, messageText, date, 0);
         GenerateId id = new GenerateId(getMaxId());
         message.setId(id.newId());
         return repo.save(message);
@@ -40,10 +45,11 @@ public class MessageService {
      *         otherwise returns the entity (a message with the same id already exists)
      */
     public Message addReplyMessage(Utilizator from, List<Utilizator> to, Message originalMessage, String messageText, LocalDateTime date) {
-        Message messageReply = new Message(from, to, messageText, date);
+        Message messageReply = new Message(from, to, messageText, date, 0);
         GenerateId id = new GenerateId(getMaxId());
         messageReply.setId(id.newId());
-        messageReply.setReply(originalMessage);
+        originalMessage.setReply(messageReply.getId());
+        notifyObservers(new EntityChangeEvent(ChangeEventType.ADD, originalMessage));
         return repo.save(messageReply);
     }
 
@@ -85,5 +91,22 @@ public class MessageService {
      */
     public Message findOne(Long id) {
         return repo.findOne(id);
+    }
+
+    private List<Observer<EntityChangeEvent>> observers=new ArrayList<>();
+
+    @Override
+    public void addObserver(Observer<EntityChangeEvent> e) {
+        observers.add(e);
+    }
+
+    @Override
+    public void removeObserver(Observer<EntityChangeEvent> e) {
+        //to do
+    }
+
+    @Override
+    public void notifyObservers(EntityChangeEvent t) {
+        observers.stream().forEach(x->x.update(t));
     }
 }

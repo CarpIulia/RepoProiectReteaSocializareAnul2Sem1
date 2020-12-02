@@ -198,7 +198,7 @@ public class UI {
                 System.out.println("Message: " + message.getMessage());
                 System.out.println("Date: " + message.getDate().format(Constants.DATE_TIME_FORMATTER));
                 if(message.getReply() != null)
-                    System.out.println("Original message: " + message.getReply().getMessage() + " " + message.getDate().format(Constants.DATE_TIME_FORMATTER));
+                    System.out.println("Original message: " + messageService.findOne(message.getReply()).getMessage() + " " + message.getDate().format(Constants.DATE_TIME_FORMATTER));
                 System.out.println();
             }
         });

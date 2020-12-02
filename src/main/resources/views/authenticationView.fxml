@@ -11,9 +11,9 @@
          <image>
             <Image url="@../images/white.png" />
          </image></ImageView>
-      <Label fx:id="authLabel" layoutX="118.0" layoutY="70.0" prefHeight="31.0" prefWidth="168.0" text="AUTHENTICATION">
+      <Label fx:id="authLabel" layoutX="89.0" layoutY="72.0" prefHeight="39.0" prefWidth="217.0" text="Authentication">
          <font>
-            <Font name="Symbol" size="18.0" />
+            <Font name="Lucida Handwriting Italic" size="24.0" />
          </font></Label>
       <Label layoutX="100.0" layoutY="130.0" text="ID">
          <font>

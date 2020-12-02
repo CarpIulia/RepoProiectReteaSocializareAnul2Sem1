@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="401.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="socialnetwork.controller.FriendshipRequestsController">
+    <children>
+    <TextField fx:id="currentUser" editable="false" layoutX="14.0" layoutY="14.0">
+        <font>
+            <Font size="18.0" />
+        </font></TextField>
+    <MenuBar layoutX="238.0" layoutY="21.0" prefHeight="25.0" prefWidth="217.0">
+        <menus>
+            <Menu mnemonicParsing="false" text="Home">
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#backToHomePage" text="Home Page" />
+                    <MenuItem disable="true" mnemonicParsing="false" text="Friendship requests" />
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Messages">
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#handleInbox" text="Inbox" />
+                    <MenuItem mnemonicParsing="false" onAction="#handleComposeMessage" text="Compose" />
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Account">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Settings" />
+                    <MenuItem mnemonicParsing="false" text="Log out" />
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+    <Separator layoutX="455.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="406.0" prefWidth="1.0" />
+      <ListView fx:id="listViewCereriPrietenieTrimise" layoutX="468.0" layoutY="47.0" prefHeight="305.0" prefWidth="182.0" />
+      <Button layoutX="533.0" layoutY="362.0" mnemonicParsing="false" text="Delete" onAction="#deleteRequestHandle"/>
+      <Label layoutX="504.0" layoutY="20.0" text="Your requests">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+    </children>
+
+</AnchorPane>

@@ -1,18 +1,18 @@
 package socialnetwork;
 import javafx.scene.image.Image;
 import socialnetwork.config.ApplicationContext;
-import socialnetwork.domain.CererePrietenie;
-import socialnetwork.domain.Prietenie;
-import socialnetwork.domain.Tuple;
-import socialnetwork.domain.Utilizator;
+import socialnetwork.domain.*;
 import socialnetwork.domain.validators.CererePrietenieValidator;
+import socialnetwork.domain.validators.MessageValidator;
 import socialnetwork.domain.validators.PrietenieValidator;
 import socialnetwork.domain.validators.UtilizatorValidator;
 import socialnetwork.repository.Repository;
 import socialnetwork.repository.file.CererePrietenieFile;
+import socialnetwork.repository.file.MessageFile;
 import socialnetwork.repository.file.PrietenieFile;
 import socialnetwork.repository.file.UtilizatorFile;
 import socialnetwork.service.CererePrietenieService;
+import socialnetwork.service.MessageService;
 import socialnetwork.service.PrietenieService;
 import socialnetwork.service.UtilizatorService;
 import socialnetwork.controller.AuthenticationController;
@@ -37,6 +37,9 @@ public class MainApp extends Application {
     Repository<Long, CererePrietenie>  cererePrietenieFileRepository;
     CererePrietenieService cererePrietenieService;
 
+    Repository<Long, Message> messageFileRepository;
+    MessageService messageService;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -55,11 +58,14 @@ public class MainApp extends Application {
         cererePrietenieFileRepository = new CererePrietenieFile(cerereFileName, new CererePrietenieValidator());
         cererePrietenieService = new CererePrietenieService(cererePrietenieFileRepository);
 
+        String messageFileName = "data/messages.csv";
+        messageFileRepository = new MessageFile(messageFileName, new MessageValidator());
+        messageService = new MessageService(messageFileRepository);
+
         initView(primaryStage);
         primaryStage.setWidth(400);
         primaryStage.setHeight(600);
         primaryStage.show();
-
 
     }
 
@@ -73,7 +79,8 @@ public class MainApp extends Application {
         primaryStage.getIcons().add(new Image("/images/icon.png"));
 
         AuthenticationController authenticationController = authenthicationLoader.getController();
-        authenticationController.setUtilizatorService(utilizatorService, prietenieService, cererePrietenieService);
+        authenticationController.setServices(utilizatorService, prietenieService, cererePrietenieService, messageService);
+        authenticationController.setStage(primaryStage);
 
     }
 }

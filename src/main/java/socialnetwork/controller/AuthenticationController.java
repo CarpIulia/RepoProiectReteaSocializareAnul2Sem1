@@ -9,6 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import socialnetwork.domain.Utilizator;
 import socialnetwork.service.CererePrietenieService;
+import socialnetwork.service.MessageService;
 import socialnetwork.service.PrietenieService;
 import socialnetwork.service.UtilizatorService;
 
@@ -17,20 +18,23 @@ import java.io.IOException;
 public class AuthenticationController {
     @FXML
     private TextField textFieldId;
+    Stage primaryStage;
 
     UtilizatorService utilizatorService;
     PrietenieService prietenieService;
     CererePrietenieService cererePrietenieService;
+    MessageService messageService;
 
     @FXML
     private void initialize() {
 
     }
 
-    public void setUtilizatorService(UtilizatorService utilizatorService, PrietenieService prietenieService, CererePrietenieService cererePrietenieService) {
+    public void setServices(UtilizatorService utilizatorService, PrietenieService prietenieService, CererePrietenieService cererePrietenieService, MessageService messageService) {
         this.utilizatorService = utilizatorService;
         this.prietenieService = prietenieService;
         this.cererePrietenieService = cererePrietenieService;
+        this.messageService = messageService;
     }
 
     public void handleConectare() {
@@ -55,14 +59,20 @@ public class AuthenticationController {
             dialogStage.setScene(scene);
 
             HomePageController homePageController = homePageLoader.getController();
-            homePageController.setServices(utilizatorService, prietenieService, cererePrietenieService);
+            homePageController.setServices(utilizatorService, prietenieService, cererePrietenieService, messageService);
             homePageController.setCurrentUser(utilizator);
+            homePageController.setStage(dialogStage);
 
             dialogStage.show();
+            primaryStage.close();
             textFieldId.clear();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setStage(Stage primaryStage) {
+        this.primaryStage=primaryStage;
     }
 }

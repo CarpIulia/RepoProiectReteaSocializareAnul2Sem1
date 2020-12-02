@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import socialnetwork.domain.CererePrietenie;
 import socialnetwork.domain.Utilizator;
 import socialnetwork.service.CererePrietenieService;
+import socialnetwork.service.MessageService;
 import socialnetwork.service.PrietenieService;
 import socialnetwork.service.UtilizatorService;
 import socialnetwork.utils.events.EntityChangeEvent;
@@ -58,7 +59,9 @@ public class HomePageController implements Observer<EntityChangeEvent> {
     UtilizatorService utilizatorService;
     PrietenieService prietenieService;
     CererePrietenieService cererePrietenieService;
+    MessageService messageService;
     Utilizator utilizator;
+    Stage homePageStage;
 
     @FXML
     private void initialize() {
@@ -72,10 +75,11 @@ public class HomePageController implements Observer<EntityChangeEvent> {
         textFieldSearch.textProperty().addListener(e->handleFilterUtilizatori());
     }
 
-    public void setServices(UtilizatorService utilizatorService, PrietenieService prietenieService, CererePrietenieService cererePrietenieService) {
+    public void setServices(UtilizatorService utilizatorService, PrietenieService prietenieService, CererePrietenieService cererePrietenieService, MessageService messageService) {
         this.utilizatorService = utilizatorService;
         this.prietenieService = prietenieService;
         this.cererePrietenieService = cererePrietenieService;
+        this.messageService = messageService;
         prietenieService.addObserver(this);
         cererePrietenieService.addObserver(this);
     }
@@ -220,6 +224,86 @@ public class HomePageController implements Observer<EntityChangeEvent> {
 
             dialogStage.show();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleComposeMessage() {
+        try {
+            FXMLLoader composeMessagePageLoader = new FXMLLoader();
+            composeMessagePageLoader.setLocation(getClass().getResource("/views/composeMessageView.fxml"));
+            AnchorPane composeMessagePageLayout = composeMessagePageLoader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Compose Message");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(composeMessagePageLayout);
+            dialogStage.setScene(scene);
+
+            ComposeMessageController composeMessageController = composeMessagePageLoader.getController();
+            composeMessageController.setServices(utilizatorService,prietenieService, cererePrietenieService, messageService);
+            composeMessageController.setCurrentUser(utilizator);
+            composeMessageController.setStage(dialogStage);
+
+            dialogStage.show();
+            homePageStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setStage(Stage homePageStage) {
+        this.homePageStage=homePageStage;
+    }
+
+    public void handleInbox(ActionEvent actionEvent) {
+        try {
+            FXMLLoader inboxPageLoader = new FXMLLoader();
+            inboxPageLoader.setLocation(getClass().getResource("/views/inboxView.fxml"));
+            AnchorPane inboxPageLayout = inboxPageLoader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Inbox");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(inboxPageLayout);
+            dialogStage.setScene(scene);
+
+            InboxController inboxController = inboxPageLoader.getController();
+            inboxController.setServices(utilizatorService,prietenieService, cererePrietenieService, messageService);
+            inboxController.setCurrentUser(utilizator);
+            inboxController.setStage(dialogStage);
+
+            dialogStage.show();
+            homePageStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleYourRequests(ActionEvent actionEvent) {
+        try {
+            FXMLLoader requestsPageLoader = new FXMLLoader();
+            requestsPageLoader.setLocation(getClass().getResource("/views/friendshipRequestsView.fxml"));
+            AnchorPane requestsPageLayout = requestsPageLoader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Friendship Requests");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(requestsPageLayout);
+            dialogStage.setScene(scene);
+
+            FriendshipRequestsController requestsController = requestsPageLoader.getController();
+            requestsController.setServices(utilizatorService,prietenieService, cererePrietenieService, messageService);
+            requestsController.setCurrentUser(utilizator);
+            requestsController.setStage(dialogStage);
+
+            dialogStage.show();
+            homePageStage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
